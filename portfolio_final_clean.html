@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Портфолио — органическое продвижение личных брендов</title>
+  <style>
+    :root{
+      --bg:#080914;--line:rgba(255,255,255,.13);--text:#F7F8FC;--muted:#AAB3C4;
+      --purple:#8B5CFF;--pink:#FF6EA9;--cyan:#45D8FF;--green:#6DFFB8;
+      --shadow:0 24px 90px rgba(0,0,0,.45);--radius:28px;--radius2:18px;--max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 13% 8%,rgba(139,92,255,.42),transparent 28%),
+        radial-gradient(circle at 88% 4%,rgba(255,110,169,.25),transparent 27%),
+        radial-gradient(circle at 50% 82%,rgba(69,216,255,.13),transparent 32%),
+        linear-gradient(180deg,#070813 0%,#0C0F1D 44%,#070813 100%);
+      overflow-x:hidden;
+    }
+    .noise{
+      position:fixed;inset:0;pointer-events:none;opacity:.055;
+      background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+      background-size:34px 34px;
+      mask-image:linear-gradient(to bottom,#000 0%,transparent 78%);
+      z-index:0;
+    }
+    .page{position:relative;z-index:1}
+    .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+    a{color:inherit;text-decoration:none}
+    header{padding:28px 0 0}
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;gap:18px;
+      padding:14px 16px;border:1px solid var(--line);
+      background:rgba(8,9,20,.58);backdrop-filter:blur(18px);
+      border-radius:999px;box-shadow:0 16px 50px rgba(0,0,0,.22)
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.025em}
+    .brand-mark{
+      width:36px;height:36px;border-radius:14px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--pink),var(--purple));
+      box-shadow:0 0 36px rgba(255,110,169,.26);font-weight:950
+    }
+    .nav-links{display:flex;gap:18px;color:var(--muted);font-size:14px;font-weight:650}
+    .nav-links a:hover{color:#fff}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid rgba(109,255,184,.25);background:rgba(109,255,184,.10);
+      color:#BFFFE2;padding:9px 12px;border-radius:999px;font-size:13px;font-weight:800;white-space:nowrap
+    }
+    .dot{width:8px;height:8px;background:var(--green);border-radius:999px;box-shadow:0 0 22px var(--green)}
+    .hero{padding:88px 0 70px;display:grid;grid-template-columns:1.08fr .92fr;gap:44px;align-items:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(139,92,255,.32);background:rgba(139,92,255,.13);
+      color:#D9D1FF;font-size:14px;font-weight:850;margin-bottom:22px
+    }
+    h1{font-size:clamp(42px,7.4vw,88px);line-height:.95;letter-spacing:-.075em;margin:0 0 26px}
+    .gradient-text{
+      color:transparent;background:linear-gradient(90deg,#fff 0%,#FFD6EA 26%,#9CCBFF 58%,#6DFFB8 100%);
+      -webkit-background-clip:text;background-clip:text
+    }
+    .lead{margin:0 0 32px;max-width:720px;color:var(--muted);font-size:19px;line-height:1.65}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+    .btn{
+      display:inline-flex;justify-content:center;align-items:center;gap:10px;
+      padding:15px 20px;border-radius:16px;font-weight:900;border:1px solid transparent;transition:.22s ease
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 18px 46px rgba(255,110,169,.19)}
+    .btn-secondary{background:rgba(255,255,255,.07);border-color:var(--line)}
+    .hero-panel{
+      border:1px solid var(--line);border-radius:var(--radius);
+      background:radial-gradient(circle at 76% 10%,rgba(69,216,255,.17),transparent 36%),linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.045));
+      box-shadow:var(--shadow);padding:24px;overflow:hidden
+    }
+    .phone-card{
+      border:1px solid rgba(255,255,255,.13);border-radius:28px;background:#0E1222;overflow:hidden;
+      box-shadow:inset 0 1px rgba(255,255,255,.08)
+    }
+    .phone-top{
+      padding:18px;display:flex;justify-content:space-between;align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04)
+    }
+    .mini-title{font-weight:900;letter-spacing:-.025em}
+    .mini-sub{color:var(--muted);font-size:13px;margin-top:3px}
+    .stat-list{padding:18px;display:grid;gap:12px}
+    .stat-row{
+      display:grid;grid-template-columns:48px 1fr;gap:13px;align-items:center;
+      padding:14px;border-radius:18px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.055)
+    }
+    .stat-icon{
+      width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-size:22px;
+      background:linear-gradient(135deg,rgba(255,110,169,.95),rgba(69,216,255,.72))
+    }
+    .stat-main{font-size:25px;font-weight:950;letter-spacing:-.04em}
+    .stat-desc{color:var(--muted);font-size:13px;line-height:1.35}
+    section{padding:58px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-bottom:28px}
+    h2{font-size:clamp(31px,4.3vw,56px);line-height:1.02;letter-spacing:-.055em;margin:0}
+    .section-copy{max-width:580px;margin:0;color:var(--muted);line-height:1.65;font-size:16px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.082),rgba(255,255,255,.04));
+      border-radius:var(--radius2);padding:24px;box-shadow:0 18px 60px rgba(0,0,0,.19)
+    }
+    .metric-card{min-height:188px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
+    .metric-card::after{
+      content:"";position:absolute;width:170px;height:170px;border-radius:999px;right:-70px;bottom:-80px;
+      background:radial-gradient(circle,rgba(255,110,169,.23),transparent 70%)
+    }
+    .metric{
+      font-size:55px;line-height:.95;font-weight:950;letter-spacing:-.075em;color:transparent;
+      background:linear-gradient(90deg,#fff,#6DFFB8);-webkit-background-clip:text;background-clip:text
+    }
+    .metric-label{color:var(--muted);margin-top:12px;line-height:1.45;position:relative;z-index:1}
+    .card h3{margin:0 0 12px;font-size:22px;letter-spacing:-.03em}
+    .card p{margin:0;color:var(--muted);line-height:1.62}
+    .cases{display:grid;gap:18px}
+    .case{display:grid;grid-template-columns:.82fr 1.18fr;gap:18px;align-items:stretch}
+    .case-visual{
+      min-height:310px;border-radius:var(--radius2);border:1px solid rgba(255,255,255,.12);padding:30px;
+      background:
+        radial-gradient(circle at 22% 18%,rgba(255,110,169,.24),transparent 34%),
+        radial-gradient(circle at 78% 82%,rgba(69,216,255,.16),transparent 40%),
+        linear-gradient(135deg,rgba(139,92,255,.16),rgba(255,255,255,.045));
+      position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:58px;
+      box-shadow:inset 0 1px rgba(255,255,255,.08),0 18px 60px rgba(0,0,0,.18)
+    }
+    .case-visual::before{content:"";position:absolute;width:240px;height:240px;border-radius:999px;right:-90px;bottom:-100px;background:radial-gradient(circle,rgba(109,255,184,.16),transparent 68%);pointer-events:none}
+    .case-kicker{position:relative;z-index:1;color:#BFFFE2;font-size:14px;font-weight:900}
+    .case-number{position:relative;z-index:1;font-size:64px;line-height:.94;font-weight:950;letter-spacing:-.08em}
+    .case-number span{display:block;color:var(--muted);font-size:20px;letter-spacing:-.03em;margin-top:10px;font-weight:850;line-height:1.25}
+    .case-content{
+      border-radius:var(--radius2);border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.078),rgba(255,255,255,.04));padding:28px
+    }
+    .case-content h3{margin:0 0 12px;font-size:30px;letter-spacing:-.045em}
+    .case-content p{margin:0 0 16px;color:var(--muted);line-height:1.65}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    .tag{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.07);color:#E3E9F7;font-size:12px;font-weight:800}
+    .screens{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .screen-card{
+      border:1px solid var(--line);border-radius:24px;padding:16px;
+      background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.035));
+      box-shadow:0 18px 60px rgba(0,0,0,.19)
+    }
+    .screen-shot{
+      aspect-ratio:16/9;border-radius:18px;border:1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(135deg,rgba(255,110,169,.16),rgba(69,216,255,.11)),
+        rgba(255,255,255,.045);
+      background-size:cover;background-position:center;
+      overflow:hidden;position:relative;box-shadow:inset 0 1px rgba(255,255,255,.08)
+    }
+    .screen-shot::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg,transparent 45%,rgba(8,9,20,.72) 100%);
+      pointer-events:none
+    }
+    .screen-note{
+      position:absolute;left:18px;right:18px;bottom:16px;z-index:1;
+      color:#fff;font-weight:900;font-size:18px;letter-spacing:-.025em;
+      text-shadow:0 8px 24px rgba(0,0,0,.45)
+    }
+    .screen-1{background-image:linear-gradient(180deg,transparent 45%,rgba(8,9,20,.72) 100%),url('screen-1.jpg')}
+    .screen-2{background-image:linear-gradient(180deg,transparent 45%,rgba(8,9,20,.72) 100%),url('screen-2.jpg')}
+    .screen-card h3{margin:14px 6px 7px;font-size:20px;letter-spacing:-.035em}
+    .screen-card p{margin:0 6px 4px;color:var(--muted);line-height:1.55}
+    .process{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+    .step{min-height:218px;padding:20px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.055)}
+    .step-num{
+      width:38px;height:38px;display:grid;place-items:center;border-radius:14px;
+      background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);font-weight:950;margin-bottom:18px
+    }
+    .step h3{margin:0 0 10px;font-size:18px;letter-spacing:-.03em}
+    .step p{margin:0;color:var(--muted);line-height:1.55;font-size:14px}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+    .list li{display:grid;grid-template-columns:24px 1fr;gap:12px;color:var(--muted);line-height:1.5}
+    .check{width:22px;height:22px;border-radius:8px;background:rgba(109,255,184,.14);color:#A7FFD4;display:grid;place-items:center;font-weight:950;margin-top:1px}
+    .cta{padding:64px 0 84px}
+    .cta-box{
+      text-align:center;border:1px solid rgba(255,255,255,.16);border-radius:34px;
+      background:radial-gradient(circle at 18% 14%,rgba(109,255,184,.13),transparent 34%),radial-gradient(circle at 88% 18%,rgba(255,110,169,.20),transparent 40%),linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.05));
+      box-shadow:var(--shadow);padding:clamp(30px,6vw,58px)
+    }
+    .cta-box h2{max-width:900px;margin:0 auto 18px}
+    .cta-box p{max-width:780px;margin:0 auto 30px;color:var(--muted);line-height:1.65;font-size:17px}
+    footer{border-top:1px solid var(--line);color:var(--muted);padding:28px 0 38px;font-size:14px}
+    .footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    @media(max-width:980px){
+      .hero,.case,.split{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}.process{grid-template-columns:1fr 1fr}.screens{grid-template-columns:1fr}.nav-links{display:none}
+    }
+    @media(max-width:640px){
+      .container{width:min(100% - 24px,var(--max))}.hero{padding:48px 0 46px}.process{grid-template-columns:1fr}
+      .case-number{font-size:48px}.nav{align-items:flex-start;border-radius:24px;flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="page">
+    <header>
+      <div class="container">
+        <nav class="nav">
+          <a href="#" class="brand"><span class="brand-mark">П</span><span>Продвижение личных брендов</span></a>
+          <div class="nav-links"><a href="#cases">Кейсы</a><a href="#screens">Скрины</a><a href="#process">Подход</a><a href="#deliverables">Что делаю</a></div>
+          <span class="pill"><span class="dot"></span> органика · продюсирование · контент</span>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container" style="display: contents;">
+          <div style="width:min(var(--max), calc(100% - 40px)); margin-left:auto;">
+            <div class="eyebrow"><span class="dot"></span> Портфолио / продюсирование личных брендов</div>
+            <h1><span class="gradient-text">Органический рост</span><br>через смыслы, ролики и упаковку</h1>
+            <p class="lead">Кейсы по развитию личных брендов, экспертного контента и вертикальных видео: стратегия, темы, первые фразы, сценарная структура, упаковка смыслов, запуск продуктов и рост аудитории без дешёвых провокаций.</p>
+            <div class="hero-actions"><a class="btn btn-primary" href="#cases">Смотреть кейсы</a><a class="btn btn-secondary" href="#process">Как я работаю</a></div>
+          </div>
+          <div style="width:min(560px, calc(100% - 40px)); margin-right:auto;">
+            <div class="hero-panel">
+              <div class="phone-card">
+                <div class="phone-top">
+                  <div><div class="mini-title">Сводка по результатам</div><div class="mini-sub">личные бренды · короткие ролики · YouTube · Telegram</div></div>
+                  <span class="pill">живые кейсы</span>
+                </div>
+                <div class="stat-list">
+                  <div class="stat-row"><div class="stat-icon">👩‍💼</div><div><div class="stat-main">Ксения Леви</div><div class="stat-desc">93 тыс. подписчиков с нуля · запуск курса · 7 тыс. в Telegram</div></div></div>
+                  <div class="stat-row"><div class="stat-icon">✨</div><div><div class="stat-main">Ольга Коробейникова</div><div class="stat-desc">207 тыс. YouTube · 200 тыс. Instagram · экспертный личный бренд</div></div></div>
+                  <div class="stat-row"><div class="stat-icon">🎬</div><div><div class="stat-main">Контент-продюсирование</div><div class="stat-desc">идеи · первые фразы · сценарии · смыслы · органическое продвижение</div></div></div>
+                  <div class="stat-row"><div class="stat-icon">🚀</div><div><div class="stat-main">Запуск продуктов</div><div class="stat-desc">контент → доверие → аудитория → курс / заявка / канал</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section-head">
+            <h2>Ключевые результаты</h2>
+            <p class="section-copy">В этих проектах важен не просто монтаж роликов, а продюсерская работа: понять аудиторию, найти сильные темы, упаковать личность и превратить контент в рост.</p>
+          </div>
+          <div class="grid-3">
+            <div class="card metric-card"><div><div class="metric">93 тыс.</div><div class="metric-label">подписчиков с нуля в кейсе Ксении Леви</div></div><p>Контентная упаковка, рост аудитории, запуск курса и развитие Telegram-канала.</p></div>
+            <div class="card metric-card"><div><div class="metric">7 тыс.</div><div class="metric-label">подписчиков в Telegram-канале</div></div><p>Переход аудитории из соцсетей в более глубокий канал коммуникации.</p></div>
+            <div class="card metric-card"><div><div class="metric">407 тыс.</div><div class="metric-label">суммарно YouTube + Instagram у Ольги Коробейниковой</div></div><p>207 тыс. на YouTube и 200 тыс. в Instagram в экспертной / духовной тематике.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cases">
+        <div class="container">
+          <div class="section-head">
+            <h2>Кейсы</h2>
+            <p class="section-copy">Это портфолио не “галерея красивых роликов”, а кейсы по органическому продвижению, продюсированию и упаковке личных брендов.</p>
+          </div>
+          <div class="cases">
+            <article class="case">
+              <div class="case-visual"><div class="case-kicker">Кейс 01 · рост с нуля</div><div class="case-number">93 тыс.<span>подписчиков с нуля</span></div></div>
+              <div class="case-content">
+                <h3>Ксения Леви</h3>
+                <p>Проект по развитию личного бренда с нуля: упаковка экспертности, рост аудитории, запуск курса и перевод части аудитории в Telegram.</p>
+                <p>Результат: 93 000 подписчиков, запуск курса, Telegram-канал на 7 000 подписчиков. Работа строилась вокруг контентной стратегии, тем, первых фраз, сценариев и доверия к личности.</p>
+                <p>Мой фокус: не просто выпускать ролики, а выстроить систему контента, которая растит аудиторию и подводит её к продукту.</p>
+                <div class="tags"><span class="tag">личный бренд</span><span class="tag">рост с нуля</span><span class="tag">запуск курса</span><span class="tag">Telegram 7 тыс.</span><span class="tag">органика</span></div>
+              </div>
+            </article>
+            <article class="case">
+              <div class="case-visual"><div class="case-kicker">Кейс 02 · экспертный бренд</div><div class="case-number">207 тыс.<span>подписчиков на YouTube</span></div></div>
+              <div class="case-content">
+                <h3>Ольга Коробейникова</h3>
+                <p>Схожая по стилю и аудитории тематика: женская аудитория, экспертность, духовность, личный бренд, аккуратная подача без дешёвых провокаций.</p>
+                <p>Результат: 207 000 подписчиков на YouTube и 200 000 подписчиков в Instagram. В таких проектах важно сохранять образ эксперта и усиливать его через контент, а не ломать личность ради случайных трендов.</p>
+                <p>Мой вклад: анализ аудитории и тем, идеи вертикальных роликов, первые фразы, сценарная структура, упаковка смыслов, продюсерская логика и органическое продвижение.</p>
+                <div class="tags"><span class="tag">YouTube · 207 тыс.</span><span class="tag">Instagram · 200 тыс.</span><span class="tag">женская аудитория</span><span class="tag">духовность</span><span class="tag">экспертность</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="screens">
+        <div class="container">
+          <div class="section-head">
+            <h2>Подтверждение результатов</h2>
+          </div>
+          <div class="screens">
+            <div class="screen-card">
+              <div class="screen-shot screen-1">
+                <div class="screen-note">Ксения Леви · рост с нуля</div>
+              </div>
+              <h3>Ксения Леви</h3>
+              <p>Рост личного бренда до 93 000 подписчиков, запуск курса и развитие Telegram-канала.</p>
+            </div>
+            <div class="screen-card">
+              <div class="screen-shot screen-2">
+                <div class="screen-note">Ольга Коробейникова · экспертный бренд</div>
+              </div>
+              <h3>Ольга Коробейникова</h3>
+              <p>207 000 подписчиков на YouTube и 200 000 подписчиков в Instagram в экспертной тематике.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="process">
+        <div class="container">
+          <div class="section-head">
+            <h2>Подход к продюсированию</h2>
+            <p class="section-copy">Я не начинаю с “давайте снимем тренд”. Сначала нужно понять человека, аудиторию, текущую упаковку и то, какие смыслы можно усилить без потери статуса.</p>
+          </div>
+          <div class="process">
+            <div class="step"><div class="step-num">1</div><h3>Анализ личности</h3><p>Образ, ценности, сильные темы, ограничения, визуальная эстетика и тон общения.</p></div>
+            <div class="step"><div class="step-num">2</div><h3>Аудитория</h3><p>Кто смотрит, чего боится, чему верит, что сохраняет, что комментирует и что покупает.</p></div>
+            <div class="step"><div class="step-num">3</div><h3>Темы и первые фразы</h3><p>Идеи роликов, первые секунды, конфликт, интрига, польза, эмоция и удержание внимания.</p></div>
+            <div class="step"><div class="step-num">4</div><h3>Сценарии</h3><p>Структура вертикальных роликов: завязка, развитие, личный смысл, экспертность и финал.</p></div>
+            <div class="step"><div class="step-num">5</div><h3>Рост</h3><p>Разбор роликов, повторение рабочих форматов, связка контента с продуктом или каналом.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="deliverables">
+        <div class="container">
+          <div class="section-head">
+            <h2>Что могу делать для проекта</h2>
+            <p class="section-copy">Формат можно выбрать: только идеи и сценарии, продюсирование роликов, контент-стратегия или работа под ключ с монтажной логикой.</p>
+          </div>
+          <div class="split">
+            <div class="card"><h3>Продюсерская часть</h3><ul class="list">
+              <li><span class="check">✓</span><span>Анализ аккаунта, аудитории, текущей подачи и сильных смыслов.</span></li>
+              <li><span class="check">✓</span><span>Поиск идей для вертикальных роликов без дешёвых провокаций.</span></li>
+              <li><span class="check">✓</span><span>Первые фразы, сценарии, структура роликов, тексты и финальные смыслы.</span></li>
+              <li><span class="check">✓</span><span>Контент-матрица под экспертность, личность, доверие и рост.</span></li>
+            </ul></div>
+            <div class="card"><h3>Упаковка и реализация</h3><ul class="list">
+              <li><span class="check">✓</span><span>Задание для монтажа, динамика, титры, визуальные акценты, призыв к действию.</span></li>
+              <li><span class="check">✓</span><span>Адаптация трендов под статус и образ человека.</span></li>
+              <li><span class="check">✓</span><span>Связка контента с запуском продукта, курсом или Telegram-каналом.</span></li>
+              <li><span class="check">✓</span><span>Разбор результатов и масштабирование форматов, которые заходят.</span></li>
+            </ul></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="container">
+          <div class="cta-box">
+            <h2>Могу предложить первые идеи под ваш аккаунт</h2>
+            <p>В качестве теста можно начать с анализа аккаунта и 3–5 идей вертикальных роликов: тема, первая фраза, сценарная структура, визуальная логика и объяснение, зачем этот ролик нужен аудитории.</p>
+            <a href="#" class="btn btn-primary">Портфолио по органическому продвижению</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer><div class="container footer-inner"><span>© Портфолио · Продвижение личных брендов</span><span>органический трафик · короткие ролики · YouTube · Instagram · Telegram</span></div></footer>
+  </div>
+</body>
+</html>
